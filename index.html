@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title>Compartilhar Localização</title>
 </head>
 <body>
-  <button onclick="compartilharLocalizacao()">Compartilhar minha localização</button>
+  <button onclick="compartilharNoWhatsApp()">Compartilhar minha localização no WhatsApp</button>
 
   <script>
-    function compartilharLocalizacao() {
+    function compartilharNoWhatsApp() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
-          const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
-          window.open(url, '_blank');
+          const mapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+          const mensagem = `Olá! Aqui está minha localização: ${mapsLink}`;
+          const whatsappURL = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
+          window.open(whatsappURL, '_blank');
         }, function(error) {
           alert("Erro ao obter localização: " + error.message);
         });
