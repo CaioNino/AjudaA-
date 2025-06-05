@@ -5,18 +5,21 @@
   <title>Compartilhar Localização</title>
 </head>
 <body>
-  <button onclick="compartilharNoWhatsApp()">Compartilhar minha localização no WhatsApp</button>
+  <button onclick="compartilharNoWhatsApp()">Compartilhar localização com contato</button>
 
   <script>
     function compartilharNoWhatsApp() {
+      const telefone = '5532991251526'; // Altere aqui para o número desejado
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           const mapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
           const mensagem = `Olá! Aqui está minha localização: ${mapsLink}`;
-          const whatsappURL = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
-          window.open(whatsappURL, '_blank');
+          const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+          
+          window.open(url, '_blank');
         }, function(error) {
           alert("Erro ao obter localização: " + error.message);
         });
